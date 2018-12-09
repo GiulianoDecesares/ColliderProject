@@ -5,27 +5,43 @@ using UnityEngine.UI;
 
 public class UpdatePopup : MonoBehaviour
 {
-    [SerializeField] private Text messageToShow;
+    [SerializeField] private Text message;
 
-    [SerializeField] private Button acceptButton;
-    [SerializeField] private Button cancelButton;
+    [SerializeField] private Button leftButton;
+    [SerializeField] private Button rightButton;
 
-    private void Awake()
+    public void SetMessage(string messageText)
     {
-        
-
+        this.message.text = messageText;
     }
 
-    public void Populate()
+    public void SetLeftButtonText(string text)
     {
-        this.messageToShow.text = "Looks like your game needs an update!";
+        Text buttonText = this.leftButton.GetComponentInChildren<Text>();
 
-        Text acceptButtonText = this.acceptButton.GetComponentInChildren<Text>();
-        Text cancelButtonText = this.cancelButton.GetComponentInChildren<Text>();
+        if(buttonText != null)
+            buttonText.text = text;
+        else
+            Debug.LogWarning("Can't get text component on left button");
+    }
 
-        acceptButtonText.text = "Update";
-        cancelButtonText.text = "Exit";
+    public void SetRightButtonText(string text)
+    {
+        Text buttonText = this.rightButton.GetComponentInChildren<Text>();
 
-        //this.acceptButton.onClick +=
+        if(buttonText != null)
+            buttonText.text = text;
+        else
+            Debug.LogWarning("Can't get text component on right button");
+    }
+
+    public void SetLeftButtonCallback(UnityEngine.Events.UnityAction call)
+    {
+        this.leftButton.onClick.AddListener(call);
+    }
+
+    public void SetRightButtonCallback(UnityEngine.Events.UnityAction call)
+    {
+        this.rightButton.onClick.AddListener(call);
     }
 }

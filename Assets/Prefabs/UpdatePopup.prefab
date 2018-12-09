@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 224891832326946376}
   - component: {fileID: 222308868154452434}
   - component: {fileID: 114651454580676704}
-  - component: {fileID: 114443000796302250}
+  - component: {fileID: 114414081892913404}
   m_Layer: 5
   m_Name: UpdatePopup
   m_TagString: Untagged
@@ -291,8 +291,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: some sample text?
---- !u!114 &114443000796302250
+  m_Text: Some sample text?
+--- !u!114 &114414081892913404
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -300,12 +300,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1395941698780326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5e5f4f27ae1a7f4bbb3d55049c11f4c, type: 3}
+  m_Script: {fileID: 11500000, guid: c59feee77c91bfc488641c36059ad27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageToShow: {fileID: 114393410169896962}
-  acceptButton: {fileID: 114240121401653104}
-  cancelButton: {fileID: 114695727493520094}
+  message: {fileID: 114393410169896962}
+  leftButton: {fileID: 114695727493520094}
+  rightButton: {fileID: 114240121401653104}
 --- !u!114 &114651454580676704
 MonoBehaviour:
   m_ObjectHideFlags: 1

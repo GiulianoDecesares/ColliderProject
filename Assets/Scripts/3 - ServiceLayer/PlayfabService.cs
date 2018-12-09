@@ -9,14 +9,28 @@ public class PlayfabService : IBackendService
 {
     private void LogInWithAndroid(System.Action<LoginResult> onSuccess, System.Action<PlayFabError> onError)
     {
-        LoginWithAndroidDeviceIDRequest request = new LoginWithAndroidDeviceIDRequest
-        {
-            AndroidDevice = SystemInfo.deviceModel,
-            AndroidDeviceId = SystemInfo.deviceUniqueIdentifier,
-            CreateAccount = true
-        };
+        #if UNITY_EDITOR
+
+            LoginWithCustomIDRequest request = new LoginWithCustomIDRequest
+            {
+                CreateAccount = true,
+                CustomId = "Develop"
+            };
+            
+            PlayFabClientAPI.LoginWithCustomID(request, onSuccess, onError);
+
+        #elif ANDROID
+
+            LoginWithAndroidDeviceIDRequest request = new LoginWithAndroidDeviceIDRequest
+            {
+                AndroidDevice = SystemInfo.deviceModel,
+                AndroidDeviceId = SystemInfo.deviceUniqueIdentifier,
+                CreateAccount = true
+            };
        
-        PlayFabClientAPI.LoginWithAndroidDeviceID(request, onSuccess, onError);
+            PlayFabClientAPI.LoginWithAndroidDeviceID(request, onSuccess, onError);
+
+        #endif
     }
 
     void IBackendService.GetLiveVersion(System.Action<string> onVersionObtained, System.Action onError)
@@ -29,32 +43,27 @@ public class PlayfabService : IBackendService
                         {
                             if(result.Data.ContainsKey("liveVersion"))
                             {
-                                string version = result.Data["liveVersion"];
-
                                 if(onVersionObtained != null)
-                                    onVersionObtained(version);
+                                    onVersionObtained(result.Data["liveVersion"]);
                             }
                             else
                             {
-                                Debug.LogWarning("Result data does not contain liveVersion key from playfab");
-
+                                // Result data does not contain liveVersion key from playfab
                                 if(onError != null)
                                     onError();
                             }
                         }
                         else
                         {
-                            Debug.LogWarning("Result version data is null");
-
+                            // Result version data is null
                             if(onError != null)
                                 onError();
                         }
                     },
 
                     error => {
-                        Debug.LogError("Could not get title data from playfab");
+                        // Could not get title data from playfab
                         Debug.Log(error.GenerateErrorReport());
-
                         if(onError != null)
                             onError();
                     }
@@ -63,8 +72,7 @@ public class PlayfabService : IBackendService
 
             fail =>
             {
-                Debug.LogError("Could not login with AndroidDeviceID to obtain live version");
-
+                // Could not login with AndroidDeviceID to obtain live version
                 if(onError != null)
                     onError();
             }
