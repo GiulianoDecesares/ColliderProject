@@ -86,7 +86,7 @@ public class UpdateManager : MonoBehaviour
 
     public void CheckForUpdatesProcedure()
     {
-        this.IsUpdateNeeded(
+        if(!this.IsUpdateNeeded(
             (string liveVersion) =>
             {
                 if(this.UIContainer != null)
@@ -100,6 +100,9 @@ public class UpdateManager : MonoBehaviour
                     Debug.LogError("Null main UI container");
                 }
             }
-        );
+        ))
+            {
+            Debug.Log("App is up to date!");
+        }
     }
 }
