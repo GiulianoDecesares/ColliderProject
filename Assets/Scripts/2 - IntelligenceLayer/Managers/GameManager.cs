@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject UIContainer;
+
     #region Sigleton
 
     public static GameManager instance { get; private set; }
@@ -26,6 +28,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateManager.instance.CheckForUpdates();
+        // Menu dialog instantiation
+        GameObject dialogPrefab = PrefabManager.instance.GetPrefabByName("MenuDialog");
+        Instantiate(dialogPrefab, this.UIContainer.transform);
+
+        // Then check for updates
+        UpdateManager.instance.CheckForUpdatesProcedure();
     }
 }

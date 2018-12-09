@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class UpdateManager : MonoBehaviour
 {
-    // Transform to show update popup. Maybe this sould not be here...
-    [SerializeField] private GameObject mainUI;
+    [SerializeField] private GameObject UIContainer;
 
     #region Sigleton
 
@@ -55,7 +54,7 @@ public class UpdateManager : MonoBehaviour
         );
     }
 
-    public bool CheckForUpdates()
+    public bool IsUpdateNeeded(System.Action<string> onUpdateNeeded = null)
     {
         bool returnState = false;
 
@@ -64,20 +63,16 @@ public class UpdateManager : MonoBehaviour
         backend.GetLiveVersion(
             (string liveVersion) =>
             {
-                if(liveVersion != Application.version)
+                if(liveVersion != this.GetAppCurrentVersion())
                 {
-                    string message = "Looks like your app needs an update! Version " + liveVersion + " is available!";
-
-                    if(this.mainUI != null)
-                        PopupController.DisplayUpdateDialog(message, this.mainUI.transform);
-                    else
-                        Debug.LogError("Null mainUI reference");
-
                     returnState = true;
+
+                    if(onUpdateNeeded != null)
+                        onUpdateNeeded(liveVersion);
                 }
                 else
                 {
-                    Debug.Log("App is up to date!");
+                    returnState = false;
                 }
             }, 
             () =>
@@ -87,5 +82,24 @@ public class UpdateManager : MonoBehaviour
         );
 
         return returnState;
+    }
+
+    public void CheckForUpdatesProcedure()
+    {
+        this.IsUpdateNeeded(
+            (string liveVersion) =>
+            {
+                if(this.UIContainer != null)
+                {
+                    string message = "Looks like your app needs an update! Version " + liveVersion + " is available!";
+
+                    PopupController.DisplayUpdateDialog(message, this.UIContainer.transform);
+                }
+                else
+                {
+                    Debug.LogError("Null main UI container");
+                }
+            }
+        );
     }
 }
