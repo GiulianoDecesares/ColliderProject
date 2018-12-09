@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IBackendService
 {
-    string GetLiveVersion();
+    void GetLiveVersion(System.Action<string> onVersionObtained, System.Action onError);
 }

@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
+    private void Start()
+    {
+        IBackendService backend = new PlayfabService();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        backend.GetLiveVersion(OnVersionObtained, OnVersionError);
+    }
+
+    private void OnVersionObtained(string version)
+    {
+        Debug.Log("Current backend version is -> " + version);
+        Debug.Log("App version is -> " + Application.version);
+    }
+
+    private void OnVersionError()
+    {
+        Debug.Log("Error trying to obtain current version");
+    }
 }
