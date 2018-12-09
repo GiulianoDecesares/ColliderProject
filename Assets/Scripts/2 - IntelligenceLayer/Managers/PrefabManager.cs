@@ -31,7 +31,6 @@ public class PrefabManager : MonoBehaviour
         }
 
         StartCoroutine(this.Initialize());
-
         DontDestroyOnLoad(this.gameObject);
     }
 
