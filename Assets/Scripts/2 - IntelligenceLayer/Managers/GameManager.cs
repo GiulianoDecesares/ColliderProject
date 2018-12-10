@@ -28,9 +28,25 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        this.StartGameProcedure();
+    }
+
+    private void StartGameProcedure()
+    {
         // Menu dialog instantiation
         GameObject dialogPrefab = PrefabManager.instance.GetPrefabByName("MenuDialog");
-        Instantiate(dialogPrefab, this.UIContainer.transform);
+        GameObject dialogInstance = Instantiate(dialogPrefab, this.UIContainer.transform);
+
+        MenuDialog menuDialog = dialogInstance.GetComponent<MenuDialog>();
+
+        if(menuDialog != null)
+        {
+
+        }
+        else
+        {
+            Debug.LogWarning("Menu dialog component is missing");
+        }
 
         // Then check for updates
         UpdateManager.instance.CheckForUpdatesProcedure();

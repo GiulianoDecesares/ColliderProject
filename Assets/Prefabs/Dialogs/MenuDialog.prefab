@@ -241,6 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224940112922754966}
   - component: {fileID: 222269602607001614}
+  - component: {fileID: 114366514457739822}
   m_Layer: 5
   m_Name: MenuDialog
   m_TagString: Untagged
@@ -494,6 +495,24 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114366514457739822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939882681581378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc333b2aa0b8374888ac5e0bca433c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameLogo: {fileID: 114393896353802166}
+  gameTitle: {fileID: 114707409621663920}
+  playButton: {fileID: 114699697388756960}
+  playTutorialButton: {fileID: 114334108954289856}
+  optionsButton: {fileID: 114284371436860008}
+  creditsButton: {fileID: 114384901782013228}
+  exitButton: {fileID: 114129066858704916}
 --- !u!114 &114384901782013228
 MonoBehaviour:
   m_ObjectHideFlags: 1
