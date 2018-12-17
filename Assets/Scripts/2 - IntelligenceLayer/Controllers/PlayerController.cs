@@ -11,14 +11,12 @@ public class PlayerController : MonoBehaviour
     {
         this.rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
 
-        Vector2 force = new Vector2(10, 10);
-
-        this.Move(force);
+        this.Shoot(new Vector2(0f, 3f));
 	}
 
-    public void Move(Vector2 force)
+    public void Shoot(Vector2 force)
     {
-        this.rigidBody.AddForce(force);
+        this.rigidBody.AddForce(force, ForceMode2D.Impulse);
     }
 
 }
