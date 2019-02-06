@@ -19,6 +19,6 @@ public class InputController : MonoBehaviour, IPointerClickHandler, IDragHandler
         // Same as the previous method
 
         Debug.Log("Pointer dragging detected");
-        Debug.Log("Dragging position is " + eventData.delta);
+        Debug.Log("Dragging position is " + eventData.position);
     }
 }
